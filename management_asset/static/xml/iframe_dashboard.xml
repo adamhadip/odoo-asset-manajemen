@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="iFrameDashboard">
+         <iframe t-attf-style="border:0; width:100%; height:100%; display:block; overflow:auto;"  src="https://lookerstudio.google.com/embed/reporting/be25a15a-eb1c-4397-b78b-95d5dff74cef/page/71hZD" frameborder="0" style="border:0" allowfullscreen="1"></iframe>
+    </t>
+</templates>

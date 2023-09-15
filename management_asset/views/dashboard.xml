@@ -1,0 +1,9 @@
+<odoo>
+
+    <record model="ir.actions.client" id="action_view_dashboard">
+        <field name="name">dashboard</field>
+        <field name="tag">iframe_dashboard_client</field>
+    </record>
+
+    <menuitem id="menu_dashboard" name="Dashboard" sequence="10" parent="menu_asset" action="action_view_dashboard"/>
+</odoo>

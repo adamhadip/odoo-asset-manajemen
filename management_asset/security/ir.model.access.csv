@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_asset_status,access.asset.status,model_asset_status,,1,1,1,1
+access_asset_loan	,access.asset.loan,model_asset_loan,,1		,1,1,1
+access_asset_form_peline,access.asset.form.peline,model_asset_form_peline,,1,1,1,1
+access_asset_perbaikan	,access.asset.perbaikan,model_asset_perbaikan,,1,1,1,1
+access_dashboard_name	,access.dashboard.name,model_dashboard_name,,1,1,1,1

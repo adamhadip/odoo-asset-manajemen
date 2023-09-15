@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_asset_tree_form">
+        <field name="name">asset.form.tree</field>
+        <field name="model">asset.loan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="status_asset"/>
+                <field name="divisi"/>
+                <field name="loan_date"/>
+                <field name="jumlah_pinjam"/>
+                <field name="notes"/>
+                <field name="duration"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_asset_form_loan">
+        <field name="name">asset.form.loan</field>
+        <field name="model">asset.loan</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button id ="button_borrow" name="action_borrw" string="Borrowed" class="btn-primary" type="object"/>
+                    <button id ="button_draft" name="action_draft" string="Draft" states="borrowed" type="object"/>
+                    <button id ="button_return" name="return_asset" string="Return Asset" type="object" states="borrowed"/>
+                    <field name="state" widget="statusbar" statusbar_visible ="borrowed,draft"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="assets_img" class="oe_avatar" widget="image"/>
+                        </group>
+                        <group>
+                            <field name="name"/>
+                            <field name="divisi"/>
+                            <field name="duration"/>
+                        </group>
+                        <group>
+                            <field name="loan_date"/>
+                            <field name="return_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Details" name="details">
+                            <group>
+                                <field name="status_asset"/>
+                                <field name="jumlah_pinjam"/>
+                                <field name="notes"/>
+                            </group>
+                        </page>
+                        <page string="Others" name="barang">
+                            <field name="id_peminjam_lines_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="namaa_barang"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_asset_loankanban">
+        <field name="name">asset.loan.kanban</field>
+        <field name="model">asset.loan</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="divisi"/>
+                <field name="loan_date"/>
+                <field name="return_date"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <div class="o_kanban_image d-none d-md-block"
+                                t-attf-style="background-image:url('#{kanban_image('asset.loan', 'assets_img' , record.id.raw_value, placeholder)}')">
+                            </div>
+                            <div class="oe_kanban_details d-flex flex-column">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <ul>
+                                    <li>Divisi: <field name="divisi"/></li>
+                                    <li>Tanggal Pinjam: <field name="loan_date"/></li>
+                                    <li>Duration: <field name="duration"/></li>
+                                    <li>Tanggal Balik: <field name="return_date"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_view_asset_loan">
+        <field name="name">Asset Loan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.loan</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem id = "menu_item" name="Form" sequence="10" parent="menu_asset"/>
+    <menuitem id = "menu_item_master" name="Form Asset" parent="menu_item" sequence="10" action="action_view_asset_loan"/>
+</odoo>

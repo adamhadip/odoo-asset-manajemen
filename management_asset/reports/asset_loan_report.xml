@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_loan">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+
+                        <div class="col-12 text-center">
+                            <img alt="img" t-if="doc.assets_img" t-att-src="image_data_uri(doc.assets_img)" style="max-height:150px;"/>
+                            <h3 t-field="doc.name" style="color: black;"/>
+                            <h3 t-field="doc.divisi" style="color: black"/>
+                            <h3 t-field="doc.duration" style="color: black"/>
+                            <h3 t-field="doc.state" style="color: black"/>
+                            <h3 t-field="doc.loan_date" style ="border-bottom:1px solid black;"/>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4 text-left">
+                                <strong>Nama Barang: </strong>
+                                <span t-field="doc.status_asset"/>
+                            </div>
+                            <div class="col-4 text-left">
+                                <strong>Jumlah Barang Dipinjam: </strong>
+                                <span t-field="doc.jumlah_pinjam"/>
+                            </div>
+                            <div class="col-4 text-left">
+                                <strong>Description: </strong>
+                                <span t-field="doc.notes"/>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

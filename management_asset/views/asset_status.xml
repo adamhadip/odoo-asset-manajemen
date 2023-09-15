@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_asset_tree">
+        <field name="name">asset.status.tree</field>
+        <field name="model">asset.status</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="tipe_asset"/>
+                <field name="geo_tag"/>
+                <field name="description"/>
+                <field name="jumlah_barang"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view"  id="view_asset_status_form" >
+        <field name="name">asset.status.form</field>
+        <field name="model">asset.status</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button id ="button_available" name="action_avai" string="Available" class="btn-primary" type="object"/>
+                    <button id ="button_unavailable" name="action_unava" string="Unavailable" class="btn-primary" type="object" states="none"/>
+                    <button id ="button_none" name="action_none" string="None" states="available,unavailable" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible ="available,unavailable"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="asset_img" class="oe_avatar" widget="image"/>
+                        </group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="tipe_asset"/>
+                        </group>
+                        <group>
+                            <field name="jumlah_barang"/>
+                            <field name="geo_tag"/>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page>
+                            <field name="idpinjaman_ids">
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_asset_status_kanban">
+        <field name="name">asset.status.kanban</field>
+        <field name="model">asset.status</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="jumlah_barang"/>
+                <field name="state"/>
+                <field name="asset_img"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <div class="o_kanban_image d-none d-md-block"
+                                t-attf-style="background-image:url('#{kanban_image('asset.status', 'asset_img' , record.id.raw_value, placeholder)}')">
+                            </div>
+                            <div class="oe_kanban_details d-flex flex-column">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <ul>
+                                    <li>Tipe Asset: <field name="tipe_asset"/></li>
+                                    <li>Jumlah: <field name="jumlah_barang"/></li>
+                                    <li>Status: <field name="state"/></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_view_asset_form">
+            <field name="name">Asset</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">asset.status</field>
+            <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem id="menu_asset" name="Asset Management" sequence="10"/>
+    <menuitem id="menu_asset_master" name="Asset" parent="menu_asset" sequence="10" action="action_view_asset_form"/>
+
+</odoo>

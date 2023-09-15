@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_asset_tree_perbaikan">
+        <field name="name">asset.form.tree.perbaikan</field>
+        <field name="model">asset.perbaikan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="items"/>
+                <field name="durasi"/>
+                <field name="fix_date"/>
+                <field name="jumlah_perbaikan"/>
+                <field name="state"/>
+                <field name="done_date"/>
+            </tree>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="view_asset_form_perbaikan">
+        <field name="name">asset.form.perbaikan</field>
+        <field name="model">asset.perbaikan</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button id ="button_main" name="action_mainte" string="Maintenance" class="btn-primary" type="object"/>
+                    <button id ="button_todo" name="action_todo" string="To Do" states="maintenance" type="object"/>
+                    <button id ="button_fix" name="asset_fix" string="Fix" type="object" states="maintenance"/>
+                    <field name="state" widget="statusbar" statusbar_visible ="maintenance,todo"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="items" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="assets_image" widget="image"/>
+                        </group>
+                        <group>
+                            <field name="items"/>
+                            <field name="durasi"/>
+                            <field name="jumlah_perbaikan"/>
+                        </group>
+                        <group>
+                            <field name='fix_date'/>
+                            <field name="done_date"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_view_asset_perbaikan">
+        <field name="name">Asset Perbaikan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">asset.perbaikan</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+
+    <menuitem id="menu_perbaikan" name="Perbaikan" sequence="10" parent="menu_asset"/>
+    <menuitem id="menu_perbaikan_master" name="Form Perbaikan" sequence="10" parent="menu_perbaikan" action="action_view_asset_perbaikan"/>
+
+</odoo>

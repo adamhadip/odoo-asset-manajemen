@@ -1,0 +1,15 @@
+<odoo>
+    <report id="report_ir_asset_loan_view"
+            string="Asset Loan Report"
+            model="asset.loan"
+            report_type="qweb-pdf"
+            name="management_asset.report_loan"
+            file="management_asset.report_loan"/>
+
+    <report id="report_ir_asset_status"
+            string="Asset Status Report"
+            model="asset.status"
+            report_type="qweb-pdf"
+            name="management_asset.report_asset"
+            file="management_asset.report_asset"/>
+</odoo>
